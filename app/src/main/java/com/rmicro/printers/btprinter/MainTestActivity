@@ -20,6 +20,7 @@ import com.rmicro.printers.btprinter.library.core.PrintDataMaker;
 import com.rmicro.printers.btprinter.library.core.PrintExecutor;
 import com.rmicro.printers.btprinter.library.core.PrintSocketHolder;
 import com.rmicro.printers.btprinter.library.core.PrinterWriter;
+import com.rmicro.printers.btprinter.library.core.PrinterWriter12mm;
 import com.rmicro.printers.btprinter.library.core.PrinterWriter80mm;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ import java.util.List;
 import java.util.Set;
 
 public class MainTestActivity extends AppCompatActivity implements ListDialog.OnDismissListener, ListDialog.OnItemSelectedListener, PrintSocketHolder.OnStateChangedListener, PrintExecutor.OnPrintResultListener {
-
+    private final String TAG = "MainTestActivity";
     private static final int REQ_ENABLE_BT = 10001;
     public static final String SP_FILE_CUR_PRINTER = "cur_printer";
     public static final String SP_KEY_ADDRESS = "address";
@@ -113,7 +114,8 @@ public class MainTestActivity extends AppCompatActivity implements ListDialog.On
         // 如果当前实例已经关联设备，直接使用
         if (mUsedDevice != null) {
             mDevice = mUsedDevice;
-            print();
+            //print();
+            printString();
             return;
         }
         // 从本地记录中取出保存的蓝牙设备，直接使用
@@ -124,7 +126,8 @@ public class MainTestActivity extends AppCompatActivity implements ListDialog.On
             for (BluetoothDevice device : bondedDevices) {
                 if (savedAddress.equals(device.getAddress())) {
                     mDevice = device;
-                    print();
+                    //print();
+                    printString();
                     return;
                 }
             }
@@ -172,7 +175,21 @@ public class MainTestActivity extends AppCompatActivity implements ListDialog.On
     @Override
     public void onItemSelected(BluetoothDevice btDevice) {
         mDevice = btDevice;
-        print();
+        //print();
+        printString();
+    }
+
+    private void printString(){
+        Log.d(TAG,"printString");
+        if (mDevice == null)
+            return;
+        try {
+            PrinterWriter printer;
+            printer = new PrinterWriter12mm(0, 12);
+            printer.print("123456");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -193,7 +210,7 @@ public class MainTestActivity extends AppCompatActivity implements ListDialog.On
                 ArrayList<byte[]> data = new ArrayList<>();
                 try {
                     PrinterWriter printer;
-                    printer = new PrinterWriter80mm(0, 500);
+                    printer = new PrinterWriter80mm(0, 80);
                     printer.setAlignCenter();
                     data.add(printer.getDataAndReset());
 
@@ -201,9 +218,6 @@ public class MainTestActivity extends AppCompatActivity implements ListDialog.On
                     data.addAll(image1);
                     printer.printLineFeed();
                     printer.printLineFeed();
-                    // printer.printLineFeed();
-                    // printer.printLineFeed();
-                    // printer.printLineFeed();
                     printer.feedPaperCutPartial();
 
                     data.add(printer.getDataAndClose());

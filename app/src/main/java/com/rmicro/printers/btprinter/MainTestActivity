@@ -16,12 +16,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.rmicro.printers.btprinter.library.core.PrintDataMaker;
-import com.rmicro.printers.btprinter.library.core.PrintExecutor;
-import com.rmicro.printers.btprinter.library.core.PrintSocketHolder;
-import com.rmicro.printers.btprinter.library.core.PrinterWriter;
-import com.rmicro.printers.btprinter.library.core.PrinterWriter12mm;
-import com.rmicro.printers.btprinter.library.core.PrinterWriter80mm;
+import com.rmicro.printers.btprinter.api.PrintDataMaker;
+import com.rmicro.printers.btprinter.api.PrintExecutor;
+import com.rmicro.printers.btprinter.api.PrintSocketHolder;
+import com.rmicro.printers.btprinter.api.PrinterWriter;
+import com.rmicro.printers.btprinter.api.core.PrinterWriter12mm;
+import com.rmicro.printers.btprinter.api.core.PrinterWriter80mm;
 
 import java.util.ArrayList;
 import java.util.List;

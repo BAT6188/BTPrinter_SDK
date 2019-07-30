@@ -7,16 +7,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.rmicro.printers.btprinter.R;
-import com.rmicro.printers.btprinter.library.core.PrintExecutor;
+import com.rmicro.printers.btprinter.api.PrintExecutor;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, ListDialog.OnDismissListener, ListDialog.OnItemSelectedListener{
 

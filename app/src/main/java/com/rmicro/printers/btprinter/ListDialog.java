@@ -1,7 +1,6 @@
 package com.rmicro.printers.btprinter;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -15,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.rmicro.printers.btprinter.R;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -55,21 +56,6 @@ public class ListDialog extends DialogFragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mOnDismissListener = (OnDismissListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement OnDismissListener");
-        }
-        try {
-            mOnItemSelectedListener = (OnItemSelectedListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement OnItemSelectedListener");
-        }
-    }
-
-    @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
         mOnDismissListener.onDismiss(dialog);
@@ -78,6 +64,16 @@ public class ListDialog extends DialogFragment {
     void setProgressBarVisible(boolean visible) {
         mProgressBar.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
         mTvSearching.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
+    }
+
+    @SuppressWarnings("unused")
+    public void setmOnDismissListener(OnDismissListener mOnDismissListener) {
+        this.mOnDismissListener = mOnDismissListener;
+    }
+
+    @SuppressWarnings("unused")
+    public void setmOnItemSelectedListener(OnItemSelectedListener mOnItemSelectedListener) {
+        this.mOnItemSelectedListener = mOnItemSelectedListener;
     }
 
     interface OnDismissListener {
